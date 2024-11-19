@@ -104,12 +104,7 @@ namespace datetime {
     //%blockid=date_getinzone
     //%block="on get date index $idx in daymonth $daymonth month $month year $year weekday $weekday weekmonth $weekmonth dayyear $dayyear daysince $daysince"
     //%daymonth.shadow=variables_get daymonth.defl=daymonth
-    //%month.shadow=variables_get month.defl=month
-    //%year.shadow=variables_get year.defl=year
-    //%weekday.shadow=variables_get weekday.defl=weekday
-    //%weekmonth.shadow=variables_get weekmonth.defl=weekmonth
-    //%dayyear.shadow=variables_get dayyear.defl=dayyear
-    //%daysince.shadow=variables_get daysince.defl=daysince
+    //%draggableParameters="reporter"
     //%handlerStatement=1
     //%group="get date"
     export function getdateinzone(idx: number, getdate:(daymonth: number, month: number, year: number, weekday: number, weekmonth: number, dayyear: number, daysince: number) => void) {
