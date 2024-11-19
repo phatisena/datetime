@@ -102,10 +102,17 @@ namespace datetime {
     }
 
     //%blockid=date_getinzone
-    //%block="on get date index $idx in daymonth $daymonth month $month year $year ||weekday $weekday weekmonth $weekmonth dayyear $dayyear daysince $daysince"
-    //%group="get date"
+    //%block="on get date index $idx in daymonth $daymonth month $month year $year weekday $weekday weekmonth $weekmonth dayyear $dayyear daysince $daysince"
+    //%daymonth.shadow="variable_get" daymonth.defl="daymonth"
+    //%month.shadow="variable_get" month.defl="month"
+    //%year.shadow="variable_get" year.defl="year"
+    //%weekday.shadow="variable_get" weekday.defl="weekday"
+    //%weekmonth.shadow="variable_get" weekmonth.defl="weekmonth"
+    //%dayyear.shadow="variable_get" dayyear.defl="dayyear"
+    //%daysince.shadow="variable_get" daysince.defl="daysince"
     //%handlerStatement=1
-    export function getdateinzone(idx: number, getdate: (daymonth: number, month: number, year: number, weekday: number, weekmonth: number, dayyear: number, daysince: number) => void) {
+    //%group="get date"
+    export function getdateinzone(idx: number, getdate:(daymonth: number, month: number, year: number, weekday: number, weekmonth: number, dayyear: number, daysince: number) => void) {
         let daymonth = datetimet[0][idx]
         let month = datetimet[1][idx]
         let year = datetimet[2][idx]
