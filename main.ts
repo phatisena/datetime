@@ -1,4 +1,4 @@
-//%block="DateTime" color="#17e689" icon="\uf073"
+//%block="DateTime" color="#17e689" icon="\uf133"
 namespace datetime {
 
     export enum datetype {
@@ -89,6 +89,7 @@ namespace datetime {
     //%blockid=date_setup
     //%block="setup datetime between $min and $max"
     //%group="create"
+    //%weight=1
     export function setdate(min: number, max: number) {
         datetimet = setup(min,max)
     }
@@ -96,6 +97,7 @@ namespace datetime {
     //%blockid=date_getinidx
     //%block="get date number array in $idx"
     //%group="get date"
+    //%weight=2
     export function getdateindex(idx: number) {
         if (idx < 0 || idx >= datetimet[0].length) { return [0,0,0,0,0,0,0] }
         return [datetimet[0][idx],datetimet[1][idx],datetimet[2][idx],datetimet[3][idx],datetimet[4][idx],datetimet[5][idx],datetimet[6][idx]]
@@ -111,7 +113,8 @@ namespace datetime {
     //%daymonth.shadow=variables_get daymonth.defl=daymonth
     //%draggableParameters="reporter"
     //%handlerStatement=1
-    //%group="get date"
+    //%group="date in zone"
+    //%weight=1
     export function getdateinzone(idx: number, getdate:(daymonth: number, month: number, year: number, weekday: number, weekmonth: number, dayyear: number, daysince: number) => void) {
         let daymonth = datetimet[0][idx]
         let month = datetimet[1][idx]
@@ -126,13 +129,15 @@ namespace datetime {
     //%blockid=date_getdatefrommian
     //%block="get date at day $day month $month year $year"
     //%group="get date"
+    //%weight=1
     export function getdate(day: number, month: number, year: number) {
         return getdateindex(idxformdmy(day,month,year))
     }
 
     //%blockid=date_daymonthyearindex
     //%block="get index from day: $day month: $month year: $year"
-    //%group="get date"
+    //%group="find index"
+    //%weight=3
     export function idxformdmy (day: number, month: number, year: number) {
         let _i = 0
         while (datetimet[2][_i] && datetimet[2][_i] < year) {
@@ -149,7 +154,8 @@ namespace datetime {
 
     //%blockid=date_monthyearindex
     //%block="get index from month: $month year: $year and last datetime $last"
-    //%group="get date"
+    //%group="find index"
+    //%weight=2
     export function idxformmy (month: number, year: number, last: boolean) {
         let _i = 0
         while (datetimet[2][_i] && datetimet[2][_i] < year) {
@@ -169,7 +175,8 @@ namespace datetime {
 
     //%blockid=date_monthyearindex
     //%block="get index from year: $year and last datetime $last"
-    //%group="get date"
+    //%group="find index"
+    //%weight=1
     export function idxformy (year: number, last: boolean) {
         let _i = 0
         while (datetimet[2][_i] && datetimet[2][_i] < year) {
@@ -186,7 +193,8 @@ namespace datetime {
 
     //%blockid=date_valinone
     //%block="get date index $idx from $dt"
-    //%group="get date"
+    //%group="get date in type"
+    //%weight=2
     export function getoneval(idx:number,dt:datetype) {
         let _j = gettype(dt)
         return getdateindex(idx)[_j]
@@ -194,7 +202,8 @@ namespace datetime {
 
     //%blockid=date_arrinone
     //%block="get date array from $dt"
-    //%group="get date"
+    //%group="get date in type"
+    //%weight=1
     export function getvaluearray(dt:datetype) {
         let _j = gettype(dt)
         return datetimet[_j]
