@@ -127,13 +127,13 @@ namespace datetime {
     //%block="get date at day $day month $month year $year"
     //%group="get date"
     export function getdate(day: number, month: number, year: number) {
-        return getdateindex(idxfromdate(day,month,year))
+        return getdateindex(idxformdmy(day,month,year))
     }
 
     //%blockid=date_daymonthyearindex
     //%block="get index from day: $day month: $month year: $year"
     //%group="get date"
-    export function idxformdate (day: number, month: number, year: number) {
+    export function idxformdmy (day: number, month: number, year: number) {
         let _i = 0
         while (datetimet[2][_i] && datetimet[2][_i] < year) {
             _i += 1
@@ -150,7 +150,7 @@ namespace datetime {
     //%blockid=date_monthyearindex
     //%block="get index from month: $month year: $year and last datetime $last"
     //%group="get date"
-    export function idxformdate (month: number, year: number, last: boolean) {
+    export function idxformmy (month: number, year: number, last: boolean) {
         let _i = 0
         while (datetimet[2][_i] && datetimet[2][_i] < year) {
             _i += 1
@@ -170,7 +170,7 @@ namespace datetime {
     //%blockid=date_monthyearindex
     //%block="get index from year: $year and last datetime $last"
     //%group="get date"
-    export function idxformdate (year: number, last: boolean) {
+    export function idxformy (year: number, last: boolean) {
         let _i = 0
         while (datetimet[2][_i] && datetimet[2][_i] < year) {
             _i += 1
