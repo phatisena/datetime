@@ -57,7 +57,7 @@ namespace datetime {
                 dm = 1
                 for (let _d = 0; _d < dayformat[ey][_m]; _d++) {
                     dw = ((ds + sw) % remdate[1]) + 1
-                    wn = (((Math.floor((ds + sw) / remdate[1]) - 1) % remdate[2]) + 1)
+                    wn = ((dw - 1) % remdate[2]) + 1
                     if (_y > min) {
                         datetable[0].push(dm)
                         datetable[1].push(mo)
