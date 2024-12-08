@@ -127,17 +127,7 @@ namespace datetime {
     //%block="get date at day $day month $month year $year"
     //%group="get date"
     export function getdate(day: number, month: number, year: number) {
-        let _i = 0
-        while (datetimet[2][_i] && datetimet[2][_i] < year) {
-            _i += 1
-        }
-        while (datetimet[1][_i] && datetimet[1][_i] < month) {
-            _i += 1
-        }
-        while (datetimet[1][_i] && datetimet[1][_i] < day) {
-            _i += 1
-        }
-        return getdateindex(_i)
+        return getdateindex(idxfromdate(day,month,year))
     }
 
     //%blockid=date_daymonthyearindex
@@ -157,14 +147,56 @@ namespace datetime {
         return checkidx(_i)
     }
 
-    //%blockid=date_indexfromdate
-    //%block="find index from "
-    //%blockid=date_getinone
-    //%block="get date index $idx in $dt"
+    //%blockid=date_monthyearindex
+    //%block="get index from month: $month year: $year and last datetime $last"
+    //%group="get date"
+    export function idxformdate (month: number, year: number, last: boolean) {
+        let _i = 0
+        while (datetimet[2][_i] && datetimet[2][_i] < year) {
+            _i += 1
+        }
+        while (datetimet[1][_i] && datetimet[1][_i] < month) {
+            _i += 1
+        }
+        if (last) {
+            while (datetimet[1][_i] && datetimet[1][_i] <= month) {
+                _i += 1
+            }
+            _i -= 1
+        }
+        return checkidx(_i)
+    }
+
+    //%blockid=date_monthyearindex
+    //%block="get index from year: $year and last datetime $last"
+    //%group="get date"
+    export function idxformdate (year: number, last: boolean) {
+        let _i = 0
+        while (datetimet[2][_i] && datetimet[2][_i] < year) {
+            _i += 1
+        }
+        if (last) {
+            while (datetimet[2][_i] && datetimet[2][_i] <= year) {
+                _i += 1
+            }
+            _i -= 1
+        }
+        return checkidx(_i)
+    }
+
+    //%blockid=date_valinone
+    //%block="get date index $idx from $dt"
     //%group="get date"
     export function getoneval(idx:number,dt:datetype) {
         let _j = gettype(dt)
         return getdateindex(idx)[_j]
     }
 
+    //%blockid=date_arrinone
+    //%block="get date array from $dt"
+    //%group="get date"
+    export function getvaluearray(dt:datetype) {
+        let _j = gettype(dt)
+        return datetimet[_j]
+    }
 }
