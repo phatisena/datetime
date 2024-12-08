@@ -97,8 +97,13 @@ namespace datetime {
     //%block="get date number array in $idx"
     //%group="get date"
     export function getdateindex(idx: number) {
-        if (idx < 0) { return [0,0,0,0,0,0,0] }
+        if (idx < 0 || idx >= datetimet[0].length) { return [0,0,0,0,0,0,0] }
         return [datetimet[0][idx],datetimet[1][idx],datetimet[2][idx],datetimet[3][idx],datetimet[4][idx],datetimet[5][idx],datetimet[6][idx]]
+    }
+
+    export function checkidx(idx: number) {
+        if (idx < 0 || idx >= datetimet[0].length) { return -1}
+        return idx
     }
 
     //%blockid=date_getinzone
@@ -123,18 +128,37 @@ namespace datetime {
     //%group="get date"
     export function getdate(day: number, month: number, year: number) {
         let _i = 0
-        while (datetimet[2][_i] < year) {
+        while (datetimet[2][_i] && datetimet[2][_i] < year) {
             _i += 1
         }
-        while (datetimet[1][_i] < month) {
+        while (datetimet[1][_i] && datetimet[1][_i] < month) {
             _i += 1
         }
-        while (datetimet[1][_i] < day) {
+        while (datetimet[1][_i] && datetimet[1][_i] < day) {
             _i += 1
         }
         return getdateindex(_i)
     }
 
+    //%blockid=date_daymonthyearindex
+    //%block="get index from day: $day month: $month year: $year"
+    //%group="get date"
+    export function idxformdate (day: number, month: number, year: number) {
+        let _i = 0
+        while (datetimet[2][_i] && datetimet[2][_i] < year) {
+            _i += 1
+        }
+        while (datetimet[1][_i] && datetimet[1][_i] < month) {
+            _i += 1
+        }
+        while (datetimet[0][_i] && datetimet[0][_i] < day) {
+            _i += 1
+        }
+        return checkidx(_i)
+    }
+
+    //%blockid=date_indexfromdate
+    //%block="find index from "
     //%blockid=date_getinone
     //%block="get date index $idx in $dt"
     //%group="get date"
@@ -142,4 +166,5 @@ namespace datetime {
         let _j = gettype(dt)
         return getdateindex(idx)[_j]
     }
+
 }
